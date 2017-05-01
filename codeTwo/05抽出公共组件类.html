@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div class="wrapper"></div>
+<script>
+</script>
+<script type="text/babel">
+    const createDOMFromString = (stringDom) => {
+      const div = document.createElement('div');
+      div.innerHTML = stringDom;
+      console.log(div);
+      return div;
+    }
+// 父级公共组件
+    class Component{
+      constructor(props = {}){
+        this.props = props
+      }
+      setState(state){
+        const old_el = this.el;
+        this.state = state;
+        this.el = this._renderDOM();
+        this.onStateChange && this.onStateChange(old_el, this.el)
+      }
+      _renderDOM(){
+        this.el = createDOMFromString(this.render());
+        this.onClick && this.el.addEventListener('click',this.onClick.bind(this),false);
+        return this.el
+      }
+    }
+    const wrapper = document.querySelector('.wrapper');
+    const mount = (component,wrapper) => {
+      wrapper.appendChild(component,renderDOM());
+      component.onStateChange = (old_el,new_el) => {
+        wrapper.inStateBefore(new_el,old_el);  // 插入新的
+        wrapper.removeChild(old_el) // 移除旧的
+      }
+    }
+
+    class LikeButton extends Component {
+      constructor(props){
+        // 将props传给父类
+        // super表示父类的构造函数，用来新建父类的this对象。
+        super(props)
+        this.state = {flag: false}
+      }
+
+      onClick() {
+        this.setState({
+          flag: !this.state.flag
+        })
+      }
+
+      render(){
+        return `<button class='like-btn' style="background-color: ${this.props.bgColor}">
+          <span class='like-text'>
+            ${this.state.flag ? '取消' : '点赞'}
+          </span>
+          <span>👍</span>
+        </button>`
+      }
+    }
+
+    class RedButton extends Component{
+      constructor(props){
+        super(props)
+        this.state = {
+          color: 'red'
+        }
+      }
+
+      onClick() {
+        this.setState({
+          color: 'blue'
+        })
+      }
+      render() {
+        return `
+            <div style="color: ${this.state.color}">${this.state.color}</div>
+        `
+      }
+    }
+
+    mount(new LikeButton({bgColor: 'red'}), wrapper);
+
+</script>
+</body>
+</html>

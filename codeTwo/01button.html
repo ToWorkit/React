@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <button class="like-btn">
+            <span class="like-txt">点下么</span>
+            <span>👍</span>
+        </button>
+    </div>
+<script type="text/babel">
+  const BUTTON = document.querySelector('.like-btn');
+  const BUTTONTXT = document.querySelector('.like-txt');
+  let flag = false;
+  BUTTON.addEventListener('click',() => {
+    flag =! flag;
+    BUTTONTXT.innerHTML = flag ? '赞一下' : 'low炸了';
+  });
+</script>
+</body>
+</html>

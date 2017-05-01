@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script>
+/*  class Clock extends React.Component{
+    constructor(){
+      super()
+      this.state = {
+        date: new Date()
+      }
+    }
+    render(){
+      return(
+        <div>
+            <h1>{this.state.date.toLocaleTimeString()}</h1>
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(
+    <Clock />,
+    document.getElementById('#target')
+  )*/
+ let Clock = React.createClass({
+   getInitialDefault(){
+     this.state = {
+       date: new Date()
+     }
+   },
+   render(){
+     return(
+       <div>
+           <h1>{this.state.date.toLocaleTimeString()}</h1>
+       </div>
+     )
+   }
+ })
+</script>
+</body>
+</html>

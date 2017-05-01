@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div class="wrapper"></div>
+<script type="text/babel">
+  // ::String => ::Document
+  // 将字符串类型的HTML代码转为DOM
+  const createDOMFromString = (stringDom) => {
+    const div = document.createElement('div');
+    div.innerHTML = stringDom;
+    return div;
+  }
+  class LikeButton {
+    // 设置状态值
+    constructor() {
+      this.state = {flag: false}
+    }
+
+    // 改变值
+    changeLikeTxt(){
+      const likeTxt = this.el.querySelector('.like-text');
+      this.state.flag = !this.state.flag;
+      likeTxt.innerHTML = this.state.flag ? '取消' : '赞'
+    }
+
+    render () {
+      this.el = createDOMFromString(`
+        <button class="like-btn">
+            <span class="like-text">赞</span>
+            <span>👍</span>
+        </button>
+      `);
+      this.el.addEventListener('click', this.changeLikeTxt.bind(this), false)
+      return this.el
+    }
+  }
+
+  const wrapper = document.querySelector('.wrapper')
+
+  const likeButton1 = new LikeButton();
+  wrapper.appendChild(likeButton1.render());
+
+  const likeButton2 = new LikeButton();
+  wrapper.appendChild(likeButton2.render())
+
+</script>
+</body>
+</html>

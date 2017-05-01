@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div class="wrapper"></div>
+<script>
+</script>
+<script type="text/babel">
+    const createDOMFromString = (stringDom) => {
+      const div = document.createElement('div');
+      div.innerHTML = stringDom;
+      return div;
+    };
+
+    class LikeButton {
+      // 初始值
+      constructor(){
+        this.state = {flag: false}
+      }
+
+      // 设置状态
+      setState(state){
+        this.state = state;
+        // 设置之后重新渲染render
+        this.el = this.render();
+      }
+
+      // 改变初始状态值
+      changeLikeTxt(){
+        this.setState({
+          // 调用时使用bind(this),为了拿到this.state.flag
+          flag: !this.state.flag
+        });
+      }
+
+      render(){
+        this.el = createDOMFromString(`<button class='like-btn'>
+          <span class='like-text'>${this.state.isLiked ? '取消' : '点赞'}</span>
+          <span>👍</span>
+        </button>`)
+        this.el.addEventListener('click',this.changeLikeTxt.bind(this),false);
+        return this.el;
+      };
+    }
+
+    const wrapper = document.querySelector('.wrapper');
+    let a = new LikeButton();
+    wrapper.appendChild(a.render())
+
+</script>
+</body>
+</html>

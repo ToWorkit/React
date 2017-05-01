@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <span>12</span>
+    </div>
+<script type="text/babel">
+  /*没法复用的代码再好也是垃圾*/
+  class LikeButton{
+    render(){
+      return `
+        <button class="like-btn">
+            <span class="like-txt">赞</span>
+            <span>👍</span>
+        </button>
+      `
+    }
+  }
+  let wrapper = document.querySelector('.wrapper');
+  let buttonTxtOne = new LikeButton();
+  wrapper.innerHTML = buttonTxtOne.render();
+
+  let buttonTxtTwo = new LikeButton();
+  // 在原有内容的基础上增加
+  wrapper.innerHTML += buttonTxtTwo.render();
+</script>
+</body>
+</html>
