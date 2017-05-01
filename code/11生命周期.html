@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+  let Hello = React.createClass({
+    // 初始状态
+    getInitialState(){
+      // 返回的必须是对象
+      return {
+        opacity: 1
+      }
+    },
+    // 插入真实DOM之后
+    componentDidMount(){
+      console.log(this); // 需要指定this，否则是window
+      // 计时器
+      this.timer = setInterval(function(){
+        // 每次获取都是计时器当前状态的值
+        let opacity = this.state.opacity;
+        opacity -= 0.3;
+        if(opacity < 0.1){
+            opacity = 1;
+        }
+        // 设置状态，必须是对象，每次设置都会触发render重新渲染组件
+        this.setState({
+          opacity: opacity
+        });
+        // 注意this
+      }.bind(this),1000);
+    },
+    render(){
+      return (
+        // 注意样式的设置
+        <div style={{opacity: this.state.opacity}}>
+            <p>只能有一个顶层标签(div)，设置对象时必须是 "{'{}'}"</p>
+            <hr/>
+            <p>this.props获取实例中的数据</p>
+             Hello {this.props.name}
+        </div>
+      );
+    }
+  });
+  ReactDOM.render(
+    <Hello name="World"/>,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

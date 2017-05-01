@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+
+<script type="text/babel">
+  let Model = React.createClass({
+    getInitialState(){
+      return {
+        data: ''
+      }
+    },
+    handleChange(event){
+        this.setState({
+          data: event.target.value
+        })
+    },
+    render(){
+      let value = this.state.data
+      return (
+        <div>
+            <input type="text" value={value}  onChange={this.handleChange}/>
+            <p>{value}</p>
+        </div>
+      )
+    }
+  })
+
+    ReactDOM.render(
+      <Model />,
+      document.getElementById('target')
+    )
+</script>
+</body>
+</html>

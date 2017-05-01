@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+    // 构造react函数组件
+  let Child = React.createClass({
+    getInitialState(){
+      return {
+        name: 'xx',
+        favour: 'oo'
+      }
+    },
+    handleClick(){
+      // 判读父组件是否有 onSubmit
+     if(this.props.onSubmit){
+//       alert(1)
+       let {name, favour} = this.getInitialState()
+       this.props.onSubmit({name, favour});
+     }
+    },
+
+    render(){
+      return (
+        <div>
+            <button onClick={this.handleClick.bind(this)}>传值</button>
+        </div>
+      )
+    }
+  })
+
+    ReactDOM.render(
+      <Child onSubmit={(ret)=>console.log(ret)} />,
+      document.getElementById('target')
+    )
+</script>
+</body>
+</html>

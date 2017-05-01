@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+  let data = '123';
+  // 创建组件对象，首字母必须大写
+  var MyTitle = React.createClass({
+    // 规定组件实例的属性
+    propTypes: {
+      // title 要求title属性的值必须是字符串
+        title: React.PropTypes.string.isRequired
+    },
+    // 必须有render 用于输出组件, 不要使用箭头函数，因为this 的指向会出现问题
+    render: function () {
+      return <h1>{this.props.title}</h1>
+    }
+  });
+
+  // 创建组件实例
+    ReactDOM.render(
+      // title属性不是字符串时，控制台会报错
+      <MyTitle title={data} />,
+      document.getElementById('target')
+    );
+</script>
+</body>
+</html>

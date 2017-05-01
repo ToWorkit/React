@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+    <h1 id="hello">你好,世界</h1>
+    <div id="box"></div>
+<script type="text/babel">
+    let arr = ['Hello',',','World'];
+    ReactDOM.render(
+      // 直接将数组解析为字符串
+      <h2>{arr}</h2>,
+      document.getElementById('box')
+    );
+</script>
+</body>
+</html>

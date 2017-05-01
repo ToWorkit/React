@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+  let LikeButton = React.createClass({
+    // 开始的状态值
+    getInitialState: function(){
+      return {liked: false};
+    },
+    handleClick: function (event) {
+      console.log(this);
+      // 点击事件触发后 通过 setState 修改状态值，然后自动调用this.render方法，再次渲染
+      this.setState({liked: !this.state.liked});
+    },
+    render: function () {
+      let text = this.state.liked ? '点击事件触发' : '点击事件未触发';
+      return (
+              <p onClick={this.handleClick}>
+                这是状态: {text}
+              </p>
+      );
+    }
+  });
+  ReactDOM.render(
+    <LikeButton />,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

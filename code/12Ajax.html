@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+    // 有问题
+  let UserGist = React.createClass({
+    // 初始化状态
+    getInitialState(){
+      // 返回必须是对象
+      return {
+        username: '',
+        lastGistUrl: ''
+      }
+    },
+    // 真是DOM载入之后
+    componentDidMount(){
+      // 获取实例对象的source
+      $.get(this.props.source,function (result) {
+        alert(result)
+        console.log(result);
+        let lastGist = result[0];
+        // 判断是否挂载完毕
+        if(this.isMounted()){
+            // 设置状态值
+          this.setState({
+            // 根据返回的数据设置
+            username: a,
+            lastGistUrl: b
+          });
+        }
+        // 必须指定 实例对象，不然会是window
+      }.bind(this).json);
+    },
+    render(){
+      return (
+        <div>
+          {this.state.username} ----- <a href={this.state.lastGistUrl}>BAT</a>
+        </div>
+      );
+    }
+  });
+  ReactDOM.render(
+    <UserGist source='12Ajax.php' />,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

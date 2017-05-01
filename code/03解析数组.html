@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+    <div id="target"></div>
+<script type="text/babel">
+  let arr = [
+    <h1>Hello,World</h1>,
+    <h1>Never,Stop</h1>
+  ];
+  ReactDOM.render(
+          <div>{arr}</div>,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

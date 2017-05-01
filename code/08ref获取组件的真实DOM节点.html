@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+  let MyComponent = React.createClass({
+    handleClick(e){
+      // 点击事件触发后 ref元素 得到焦点
+      this.refs.myInput.focus();
+      // 获取当前元素
+      console.log(e.target);
+      // 获取当前元素的上一个兄弟元素的值
+      console.log(e.target.previousElementSibling.value);
+    },
+    render: function(){
+      return (
+        <div>
+            <input type="text" ref="myInput"/>
+            <input type="button" value="点击获取真实DOM" onClick={this.handleClick}/>
+        </div>
+      );
+    }
+  });
+  ReactDOM.render(
+    <MyComponent />,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

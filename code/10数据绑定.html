@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+    // 构造组件函数
+  let Input = React.createClass({
+    // 设置初始状态值
+    getInitialState(){
+      return {value: 'Hello'};
+    },
+    // 改变事件触发函数, 触发后会重新调用 render渲染组件
+    handleChange(event){
+        // 设置状态值
+        // 发生改变时重新获取值并渲染组件
+      this.setState({value: event.target.value});
+    },
+    render(){
+      let value = this.state.value;
+      return (
+        <div>
+            <p>值为默认设置的value ，发生改变时触发change函数</p>
+            <input type="text" value={value} onChange={this.handleChange}/>
+            <p>{value}</p>
+        </div>
+      );
+    }
+  });
+  ReactDOM.render(
+    <Input />,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+  // 构造组件对象
+  let DefaultTitel = React.createClass({
+    // 设置父组件一个默认的title
+    // 返回对象时要使用 ({})  包起来
+    // 给父组件设置一个默认属性为title
+    getDefaultProps: () => ({title: 'Hello,World'}),
+    render: function () {
+      // 使用this.props 获取父组件的属性
+      return <h1>{this.props.title}</h1>
+    }
+  });
+  // 创建组件实例
+    ReactDOM.render(
+      <DefaultTitel/>,
+      document.getElementById('target')
+    );
+
+</script>
+</body>
+</html>

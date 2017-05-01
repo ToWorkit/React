@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/babel">
+
+  let NoteList = React.createClass({
+    // 必须要有 render
+        render: function () {
+            return (
+              // 需要使用React.children （避免undefined）来遍历 具体查笔记
+                    <ol>
+                      {
+                        React.Children.map(this.props.children, function (child) {
+                          // 需要服务器支持
+                          return <h2>{child}</h2>
+                        })
+                      }
+                    </ol>
+            );
+        }
+    }
+  );
+  ReactDOM.render(
+          <NoteList>
+              <span>Hello</span>
+              <span>World</span>
+          </NoteList>,
+    document.getElementById('target')
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/browser.min.js"></script>
+</head>
+<body>
+    <div id="target"></div>
+<script type="text/babel">
+  let HelloMessage = React.createClass({
+    render: function(){
+      // props 父级向子级传值的方式
+        return <h2>Hello,{this.props.className}</h2>
+    }
+  });
+
+    ReactDOM.render(
+      <HelloMessage className="World"/>,
+      document.getElementById('target')
+    );
+</script>
+</body>
+</html>
